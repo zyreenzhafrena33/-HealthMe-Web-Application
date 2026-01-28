@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block title %}Patient Dashboard | HealthMe{% endblock %}
+{% block content %}
+
+<div class="container py-5">
+
+  <!-- ✅ Show Django success messages -->
+  {% if messages %}
+  <div class="mb-4">
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- ✅ Appointment Details Section -->
+  {% if appointments %}
+  <section class="mb-5">
+    <h2 class="text-center text-primary mb-4">Your Appointment Details</h2>
+    <div class="row justify-content-center">
+      {% for appointment in appointments %}
+      <div class="col-md-6 mb-3">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title text-primary">{{ appointment.doctor.name }}</h5>
+            <p class="card-text mb-1"><strong>Specialty:</strong> {{ appointment.doctor.specialty }}</p>
+            <p class="card-text mb-1"><strong>Date:</strong> {{ appointment.date }}</p>
+            <p class="card-text mb-1"><strong>Time:</strong> {{ appointment.time }}</p>
+            <p class="card-text"><strong>Reason:</strong> {{ appointment.reason }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% else %}
+  <div class="text-center mb-5">
+    <h4 class="text-muted">You have no upcoming appointments yet.</h4>
+    <a href="{% url 'book_appointment' %}" class="btn btn-primary mt-3 px-4 py-2 rounded-pill shadow-sm">
+      Book Your First Appointment
+    </a>
+  </div>
+  {% endif %}
+
+  <!-- ✅ Welcome Section -->
+  <div class="text-center mb-5">
+    <h1 class="fw-bold text-primary">Welcome to HealthMe, {{ user.username }}!</h1>
+    <p class="lead text-muted mt-3 w-75 mx-auto">
+      Your mental health matters. We’re here to support your emotional well-being through
+      compassionate care and professional guidance — anytime, anywhere.
+    </p>
+    <a href="{% url 'book_appointment' %}" class="btn btn-primary mt-3 px-4 py-2 rounded-pill shadow-sm">
+      Book Appointment
+    </a>
+  </div>
+
+  <!-- ✅ Doctors Section -->
+  <section class="mt-5">
+    <h2 class="text-center text-primary mb-4">Our Doctors</h2>
+    <p class="text-center text-muted mb-5">Meet our certified professionals ready to help you through your journey.</p>
+
+    <div class="row justify-content-center">
+      {% for doctor in doctors %}
+      <div class="col-md-4 mb-4">
+        <div class="card border-0 shadow-sm h-100 text-center">
+          <div class="card-body">
+            <h5 class="card-title text-primary">{{ doctor.name }}</h5>
+            <p class="card-text text-muted">{{ doctor.specialty }}</p>
+            <a href="{% url 'book_appointment' %}" class="btn btn-outline-primary btn-sm mt-2 rounded-pill">
+              Book with {{ doctor.name }}
+            </a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p class="text-center text-muted">No doctors available at the moment. Please check again later.</p>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- ✅ Services Section -->
+  <section class="mt-5">
+    <h2 class="text-center text-primary mb-4">Our Services</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-3 mb-4">
+        <div class="card border-0 shadow-sm h-100 text-center">
+          <div class="card-body">
+            <h5 class="card-title text-primary">🧍 Individual Consultation</h5>
+            <p class="card-text text-muted">One-on-one sessions with licensed therapists for personalized mental health support.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="card border-0 shadow-sm h-100 text-center">
+          <div class="card-body">
+            <h5 class="card-title text-primary">👨‍👩‍👧 Family Therapy</h5>
+            <p class="card-text text-muted">Improve communication and relationships with family-centered therapy.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="card border-0 shadow-sm h-100 text-center">
+          <div class="card-body">
+            <h5 class="card-title text-primary">💬 Group Counseling</h5>
+            <p class="card-text text-muted">Connect with others who understand and support your healing process.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="card border-0 shadow-sm h-100 text-center">
+          <div class="card-body">
+            <h5 class="card-title text-primary">📱 Online Sessions</h5>
+            <p class="card-text text-muted">Receive expert care from the comfort and privacy of your home.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+{% endblock %}

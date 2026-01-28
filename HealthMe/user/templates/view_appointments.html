@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>All Appointments</h2>
+  <table class="table">
+    <tr>
+      <th>Patient</th>
+      <th>Doctor</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Reason</th>
+      <th>Actions</th>
+    </tr>
+    {% for a in appointments %}
+    <tr>
+      <td>{{ a.patient.username }}</td>
+      <td>{{ a.doctor.name }}</td>
+      <td>{{ a.date }}</td>
+      <td>{{ a.time }}</td>
+      <td>{{ a.reason }}</td>
+      <td>
+        <a href="{% url 'edit_appointment' a.id %}" class="btn btn-sm btn-warning">Edit</a>
+        <a href="{% url 'delete_appointment' a.id %}" class="btn btn-sm btn-danger">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

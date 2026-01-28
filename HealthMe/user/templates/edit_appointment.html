@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Edit Appointment</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label>Doctor:</label>
+      <select name="doctor" class="form-control">
+        {% for doctor in doctors %}
+        <option value="{{ doctor.id }}" {% if doctor.id == appointment.doctor.id %}selected{% endif %}>
+          {{ doctor.name }} ({{ doctor.specialty }})
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label>Date:</label>
+      <input type="date" name="date" value="{{ appointment.date }}" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Time:</label>
+      <input type="time" name="time" value="{{ appointment.time }}" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Reason:</label>
+      <textarea name="reason" class="form-control" required>{{ appointment.reason }}</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Update Appointment</button>
+  </form>
+</div>
+{% endblock %}

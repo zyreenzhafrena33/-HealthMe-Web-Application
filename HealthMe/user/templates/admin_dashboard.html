@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard | HealthMe{% endblock %}
+{% block content %}
+
+<div class="container py-5">
+  <!-- Welcome -->
+  <div class="text-center mb-5">
+    <h1 class="fw-bold text-primary">Welcome, Admin!</h1>
+    <p class="text-muted">Here’s an overview of today’s activity and upcoming appointments.</p>
+  </div>
+
+  <!-- Summary Boxes -->
+  <div class="row text-center mb-5">
+    <div class="col-md-4 mb-3">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title text-primary">Today’s Appointments</h5>
+          <h2 class="fw-bold text-dark">{{ today_appointments }}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title text-primary">This Week</h5>
+          <h2 class="fw-bold text-dark">{{ week_appointments }}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title text-primary">Upcoming</h5>
+          <h2 class="fw-bold text-dark">{{ upcoming_appointments }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Today's Appointments List -->
+  <section class="mt-4">
+    <h3 class="text-primary mb-3 text-center">Next Appointments (Today)</h3>
+    {% if appointments_today %}
+      <div class="table-responsive">
+        <table class="table table-bordered text-center align-middle shadow-sm">
+          <thead class="table-primary">
+            <tr>
+              <th>Patient Name</th>
+              <th>Doctor</th>
+              <th>Time</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for appointment in appointments_today %}
+            <tr>
+              <td>{{ appointment.patient.username }}</td>
+              <td>{{ appointment.doctor.name }}</td>
+              <td>{{ appointment.time }}</td>
+              <td>{{ appointment.reason }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="text-center text-muted">No appointments scheduled for today.</p>
+    {% endif %}
+  </section>
+
+  <!-- View All Button -->
+  <div class="text-center mt-4">
+    <a href="{% url 'view_appointments' %}" class="btn btn-primary px-4 py-2 rounded-pill shadow-sm">
+      View All Appointments
+    </a>
+  </div>
+</div>
+
+{% endblock %}

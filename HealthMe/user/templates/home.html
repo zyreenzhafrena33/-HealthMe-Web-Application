@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}HealthMe | Your Mental Health Matters{% endblock %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="text-center py-5 bg-light rounded shadow-sm">
+    <h1 class="display-5 fw-bold text-primary">Your Mental Health Matters</h1>
+    <p class="lead mt-3 w-75 mx-auto">
+        HealthMe is here to provide you with professional and compassionate mental health support — anytime, anywhere.
+    </p>
+    <div class="mt-4">
+        <a href="{% url 'login' %}" class="btn btn-primary btn-lg px-4">Get Help Now</a>
+    </div>
+</section>
+
+<!-- About Us Section -->
+<section class="mt-5 text-center">
+    <h2 class="text-primary mb-4">About Us</h2>
+    <p class="w-75 mx-auto">
+        At <strong>HealthMe</strong>, we believe mental well-being is just as important as physical health. 
+        Our team of certified psychiatrists and therapists are dedicated to helping you through 
+        anxiety, depression, and emotional stress with personalized care.
+    </p>
+</section>
+
+<!-- Services Section -->
+<section class="mt-5 text-center">
+    <h2 class="text-primary mb-4">Our Services</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">💬 Online Consultation</h5>
+                    <p class="card-text">Talk to licensed professionals from the comfort of your home.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">🧘 Therapy Sessions</h5>
+                    <p class="card-text">Personalized therapy to manage anxiety, stress, and depression.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">📚 Mental Health Articles</h5>
+                    <p class="card-text">Explore tips, guides, and resources for emotional wellness.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

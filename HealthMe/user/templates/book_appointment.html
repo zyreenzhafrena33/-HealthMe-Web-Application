@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Book an Appointment</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label>Select Doctor:</label>
+      <select name="doctor" class="form-control" required>
+        {% for doctor in doctors %}
+        <option value="{{ doctor.id }}">{{ doctor.name }} ({{ doctor.specialty }})</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label>Date:</label>
+      <input type="date" name="date" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+      <label>Time:</label>
+      <input type="time" name="time" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+      <label>Reason for Visit:</label>
+      <textarea name="reason" class="form-control" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit Appointment</button>
+  </form>
+</div>
+{% endblock %}
